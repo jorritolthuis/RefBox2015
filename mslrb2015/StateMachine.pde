@@ -117,7 +117,7 @@ static class StateMachine
 				}
 				break;
 				
-			case POPUP_TEAMSELECTION:
+			case POPUP_TEAMSELECTION:                                                            // << This is where we handle when the popup is clicked
 				{
 					Team t = null;
 					if(Popup.getResponse().equals("OK"))
@@ -144,7 +144,7 @@ static class StateMachine
 					}
 					
 					if(t != null)
-					t.teamConnected(teamselect);
+					t.teamConnected(teamselect);                                                   /// << We finally send the welcome message in here
 
 					Popup.close();          
 					break;

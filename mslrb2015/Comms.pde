@@ -11,13 +11,15 @@ public static void serverEvent(MyServer whichServer, Client whichClient) {
 }
 
 // Client authentication
-public static void clientValidation(MyServer whichServer, Client whichClient) {
+public static void clientValidation(MyServer whichServer, Client whichClient) {  // < This is called when a new team connects (through MyServer), Client implicitly contains Socket
 	try{
 		// BASESTATION CLIENTS AUTH
 		if (whichServer.equals(BaseStationServer)) {
 			if (!Popup.isEnabled()) {
-				if(setteamfromip(whichClient.ip()))
-				connectingClient = whichClient; // Accept client!
+				if(setteamfromip(whichClient.ip())) {                                  // <<< Here we start the connection process (show the popup to the referee)
+				  connectingClient = whichClient; // Accept client!
+          Log.logMessage("Socket = " + whichClient.socket);
+        }
 				else
 				{
 					// Invalid team

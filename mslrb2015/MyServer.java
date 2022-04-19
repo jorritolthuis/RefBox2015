@@ -309,12 +309,12 @@ public class MyServer implements Runnable {
 	public void run() {
 		while (Thread.currentThread() == thread) {
 			try {
-				Socket socket = server.accept();
+				Socket socket = server.accept();                                        // < We get the socket here
 				Client client = new Client(parent, socket);
 				
 				if (clientValidationMethod != null) {
 					try {
-						clientValidationMethod.invoke(parent, new Object[] { this, client });
+						clientValidationMethod.invoke(parent, new Object[] { this, client });              // < We could pass the socket to clientValidation() (in Comms) -> we already kinda do through the client object, not sure if we can access it though
 					} catch (Exception e) {
 						//System.err.println("Disabling serverEvent() for port " + port);
 						e.printStackTrace();
@@ -394,7 +394,7 @@ public class MyServer implements Runnable {
 	}
 
 
-	public void write(String data) {
+	public void write(String data) { // < send_to_basestation is using this function
 		synchronized (clients) {
 			int index = 0;
 			while (index < clientCount) {
